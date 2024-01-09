@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '3wmoewdoqnehqbkiqnuqeed37kvcbthop6gbj5k33l2cdlspqoga', url: 'https://ReleaseProjectAutomation@dev.azure.com/ReleaseProjectAutomation/AngularProject/_git/CorUI']])             
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                // Install Node.js and npm if not already present
+                // sh 'sudo apt-get update && sudo apt-get install -y nodejs npm'
+                bat 'npm install'
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'npm run build'
+            }
+        }
+        stage('Sonar') {
+            steps {
+              bat 'sonar-scanner'
+            }
+        
+        //stage('Deploy') {
+           // steps {
+                // Deploy to your target environment (replace with your specific deployment steps)
+                // Example:
+                // sh 'scp -r dist/* user@target-server:/var/www/html/app'
+            }
+        }
+}

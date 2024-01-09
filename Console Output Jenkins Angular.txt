@@ -1,0 +1,242 @@
+Started by user Seetharaman R
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout Code)
+[Pipeline] checkout
+The recommended git tool is: NONE
+Warning: CredentialId "3wmoewdoqnehqbkiqnuqeed37kvcbthop6gbj5k33l2cdlspqoga" could not be found.
+ > C:\Git\bin\git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication\.git # timeout=10
+Fetching changes from the remote Git repository
+ > C:\Git\bin\git.exe config remote.origin.url https://ReleaseProjectAutomation@dev.azure.com/ReleaseProjectAutomation/AngularProject/_git/CorUI # timeout=10
+Fetching upstream changes from https://ReleaseProjectAutomation@dev.azure.com/ReleaseProjectAutomation/AngularProject/_git/CorUI
+ > C:\Git\bin\git.exe --version # timeout=10
+ > git --version # 'git version 2.41.0.windows.3'
+ > C:\Git\bin\git.exe fetch --tags --force --progress -- https://ReleaseProjectAutomation@dev.azure.com/ReleaseProjectAutomation/AngularProject/_git/CorUI +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > C:\Git\bin\git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+Checking out Revision 26f1ba94478c3a91a4272df0f60cd0f52591a3e0 (refs/remotes/origin/master)
+ > C:\Git\bin\git.exe config core.sparsecheckout # timeout=10
+ > C:\Git\bin\git.exe checkout -f 26f1ba94478c3a91a4272df0f60cd0f52591a3e0 # timeout=10
+Commit message: "file added"
+ > C:\Git\bin\git.exe rev-list --no-walk 26f1ba94478c3a91a4272df0f60cd0f52591a3e0 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Install Dependencies)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication>npm install 
+npm WARN deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
+npm WARN deprecated @wessberg/ts-evaluator@0.0.27: this package has been renamed to ts-evaluator. Please install ts-evaluator instead
+
+added 991 packages, and audited 992 packages in 2m
+
+123 packages are looking for funding
+  run `npm fund` for details
+
+4 vulnerabilities (3 moderate, 1 critical)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication>npm run build 
+
+> cor-dashboard@0.0.0 build
+> ng build
+
+- Generating browser application bundles (phase: setup)...
+âœ” Browser application bundle generation complete.
+âœ” Browser application bundle generation complete.
+- Copying assets...
+âœ” Copying assets complete.
+- Generating index html...
+- Generating index html...
+2 rules skipped due to selector errors:
+  .form-floating>~label -> Did not expect successive traversals.
+  .form-floating>~label -> Did not expect successive traversals.
+âœ” Index html generation complete.
+
+Initial Chunk Files           | Names         |  Raw Size | Estimated Transfer Size
+main.cb355363d8e68f9c.js      | main          | 804.73 kB |               172.71 kB
+styles.b2e1e2f84055a5c4.css   | styles        | 752.20 kB |                72.40 kB
+scripts.483c20daf6da8dd5.js   | scripts       | 116.83 kB |                14.45 kB
+polyfills.5d02d73adec13e40.js | polyfills     |  33.02 kB |                10.68 kB
+runtime.790fd201f956353b.js   | runtime       | 904 bytes |               511 bytes
+
+| Initial Total |   1.67 MB |               270.74 kB
+
+Build at: 2024-01-05T10:37:32.009Z - Hash: 7d95cd07e5ad63a5 - Time: 96699ms
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Sonar)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication>sonar-scanner
+INFO: Scanner configuration file: C:\sonar-scanner\bin\..\conf\sonar-scanner.properties
+INFO: Project root configuration file: C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication\sonar-project.properties
+INFO: SonarScanner 5.0.1.3006
+INFO: Java 17.0.7 Eclipse Adoptium (64-bit)
+INFO: Windows 10 10.0 amd64
+INFO: User cache: C:\Windows\system32\config\systemprofile\.sonar\cache
+INFO: Analyzing on SonarQube server 10.3.0.82913
+INFO: Default locale: "en_IN", source code encoding: "windows-1252" (analysis is platform dependent)
+INFO: Load global settings
+INFO: Load global settings (done) | time=488ms
+INFO: Server id: 147B411E-AYzPPBIU2pCk7Lg9p1CM
+INFO: User cache: C:\Windows\system32\config\systemprofile\.sonar\cache
+INFO: Load/download plugins
+INFO: Load plugins index
+INFO: Load plugins index (done) | time=411ms
+INFO: Load/download plugins (done) | time=19929ms
+INFO: Process project properties
+INFO: Process project properties (done) | time=3ms
+INFO: Execute project builders
+INFO: Execute project builders (done) | time=3ms
+INFO: Project key: hotvpmkhzowhjddnyrgmpzu54vz73enfxkrlphqthglhupeuditq
+INFO: Base dir: C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication
+INFO: Working dir: C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication\.scannerwork
+INFO: Load project settings for component key: 'hotvpmkhzowhjddnyrgmpzu54vz73enfxkrlphqthglhupeuditq'
+INFO: Load project settings for component key: 'hotvpmkhzowhjddnyrgmpzu54vz73enfxkrlphqthglhupeuditq' (done) | time=314ms
+INFO: Auto-configuring with CI 'Jenkins'
+INFO: Load quality profiles
+INFO: Load quality profiles (done) | time=590ms
+INFO: Load active rules
+INFO: Load active rules (done) | time=13970ms
+INFO: Load analysis cache
+INFO: Load analysis cache | time=256ms
+WARN: The properties 'sonar.login' and 'sonar.password' are deprecated and will be removed in the future. Please pass a token with the 'sonar.token' property instead.
+INFO: Load project repositories
+INFO: Load project repositories (done) | time=296ms
+INFO: Indexing files...
+INFO: Project configuration:
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 56 files indexed...  (last one was kpi/styles.scss)
+INFO: 142 files indexed
+INFO: 44671 files ignored because of scm ignore settings
+INFO: Quality profile for css: Sonar way
+INFO: Quality profile for js: Sonar way
+INFO: Quality profile for json: Sonar way
+INFO: Quality profile for ts: Sonar way
+INFO: Quality profile for web: Sonar way
+INFO: ------------- Run sensors on module CorUIApplication
+INFO: Load metrics repository
+INFO: Load metrics repository (done) | time=281ms
+INFO: Sensor JaCoCo XML Report Importer [jacoco]
+INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=6ms
+INFO: Sensor IaC CloudFormation Sensor [iac]
+INFO: 0 source files to be analyzed
+INFO: 0/0 source files have been analyzed
+INFO: Sensor IaC CloudFormation Sensor [iac] (done) | time=85ms
+INFO: Sensor IaC AzureResourceManager Sensor [iac]
+INFO: 0 source files to be analyzed
+INFO: 0/0 source files have been analyzed
+INFO: Sensor IaC AzureResourceManager Sensor [iac] (done) | time=152ms
+INFO: Sensor JavaScript/TypeScript analysis [javascript]
+INFO: Detected os: Windows 10 arch: amd64 alpine: false. Platform: WIN_X64
+INFO: Using Node.js executable: 'C:\Program Files\nodejs\node.exe'.
+INFO: Memory configuration: OS (16186 MB), Node.js (4144 MB).
+INFO: Found 1 tsconfig.json file(s): [C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication\tsconfig.json]
+INFO: Creating TypeScript program
+INFO: TypeScript configuration file C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication\tsconfig.json
+INFO: 66 source files to be analyzed
+INFO: Creating TypeScript program (done) | time=5571ms
+INFO: Starting analysis with current program
+INFO: 5/66 files analyzed, current file: C:/ProgramData/Jenkins/.jenkins/workspace/AngularApplication/kpi/app/newuser/profile/profile.component.ts
+INFO: 65/66 files analyzed, current file: C:/ProgramData/Jenkins/.jenkins/workspace/AngularApplication/src/app/v3/summary/summary.component.spec.ts
+INFO: Analyzed 65 file(s) with current program
+INFO: Found 1 file(s) not part of any tsconfig.json: they will be analyzed without type information
+INFO: 66/66 source files have been analyzed
+INFO: Hit the cache for 0 out of 66
+INFO: Miss the cache for 66 out of 66: ANALYSIS_MODE_INELIGIBLE [66/66]
+INFO: Sensor JavaScript/TypeScript analysis [javascript] (done) | time=138473ms
+INFO: Sensor JavaScript inside HTML analysis [javascript]
+INFO: 29 source files to be analyzed
+INFO: 29/29 source files have been analyzed
+INFO: Hit the cache for 0 out of 29
+INFO: Miss the cache for 29 out of 29: ANALYSIS_MODE_INELIGIBLE [29/29]
+INFO: Sensor JavaScript inside HTML analysis [javascript] (done) | time=361ms
+INFO: Sensor CSS Rules [javascript]
+INFO: 58 source files to be analyzed
+INFO: 58/58 source files have been analyzed
+INFO: Hit the cache for 0 out of 0
+INFO: Miss the cache for 0 out of 0
+INFO: Sensor CSS Rules [javascript] (done) | time=2372ms
+INFO: Sensor CSS Metrics [javascript]
+INFO: Sensor CSS Metrics [javascript] (done) | time=356ms
+INFO: Sensor C# Project Type Information [csharp]
+INFO: Sensor C# Project Type Information [csharp] (done) | time=3ms
+INFO: Sensor C# Analysis Log [csharp]
+INFO: Sensor C# Analysis Log [csharp] (done) | time=66ms
+INFO: Sensor C# Properties [csharp]
+INFO: Sensor C# Properties [csharp] (done) | time=0ms
+INFO: Sensor HTML [web]
+INFO: Sensor HTML [web] (done) | time=569ms
+INFO: Sensor TextAndSecretsSensor [text]
+INFO: 130 source files to be analyzed
+INFO: 130/130 source files have been analyzed
+INFO: Sensor TextAndSecretsSensor [text] (done) | time=6352ms
+INFO: Sensor VB.NET Project Type Information [vbnet]
+INFO: Sensor VB.NET Project Type Information [vbnet] (done) | time=0ms
+INFO: Sensor VB.NET Analysis Log [vbnet]
+INFO: Sensor VB.NET Analysis Log [vbnet] (done) | time=41ms
+INFO: Sensor VB.NET Properties [vbnet]
+INFO: Sensor VB.NET Properties [vbnet] (done) | time=0ms
+INFO: Sensor IaC Docker Sensor [iac]
+INFO: 0 source files to be analyzed
+INFO: 0/0 source files have been analyzed
+INFO: Sensor IaC Docker Sensor [iac] (done) | time=58ms
+INFO: ------------- Run sensors on project
+INFO: Sensor Analysis Warnings import [csharp]
+INFO: Sensor Analysis Warnings import [csharp] (done) | time=2ms
+INFO: Sensor Zero Coverage Sensor
+INFO: Sensor Zero Coverage Sensor (done) | time=144ms
+INFO: SCM Publisher SCM provider for this project is: git
+INFO: SCM Publisher 119 source files to be analyzed
+INFO: SCM Publisher 119/119 source files have been analyzed (done) | time=4803ms
+INFO: CPD Executor 14 files had no CPD blocks
+INFO: CPD Executor Calculating CPD for 81 files
+INFO: CPD Executor CPD calculation finished (done) | time=275ms
+INFO: Analysis report generated in 436ms, dir size=1.0 MB
+INFO: Analysis report compressed in 1273ms, zip size=513.6 kB
+INFO: Analysis report uploaded in 336ms
+INFO: ANALYSIS SUCCESSFUL, you can find the results at: https://seetha23.sonar.com/dashboard?id=hotvpmkhzowhjddnyrgmpzu54vz73enfxkrlphqthglhupeuditq
+INFO: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+INFO: More about the report processing at https://seetha23.sonar.com/api/ce/task?id=AYzZOJ8S2pCk7Lg9qDsF
+INFO: Analysis total time: 5:47.630 s
+INFO: ------------------------------------------------------------------------
+INFO: EXECUTION SUCCESS
+INFO: ------------------------------------------------------------------------
+INFO: Total time: 6:14.859s
+INFO: Final Memory: 21M/80M
+INFO: ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+C:\ProgramData\Jenkins\.jenkins\workspace\AngularApplication@tmp\jfrog\32\.jfrog deleted
+Finished: SUCCESS
